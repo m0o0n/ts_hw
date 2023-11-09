@@ -8,19 +8,14 @@
   salary, яке буде доступне лише всередині класу Employee та його підкласів.
 
 
-  Клас Manager повинен бути підклас класу Employee
+  Клас Manager повинен бути підкласom класу Employee
 
   Необхідно реалізувати в класі Manager конструктор, який викликатиме конструктор суперкласу та збільшуватиме salary на 10000.
 
 */
 
 class Employee {
-  // Заповніть модифікатори доступу
-  name: string;
-  department: string;
-  salary: number;
-
-  constructor(name: string, department: string, salary: number) {
+  constructor(public name: string, protected department: string, private salary: number) {
     this.name = name;
     this.department = department;
     this.salary = salary;
@@ -29,11 +24,22 @@ class Employee {
   getEmployeeDetails() {
     return `Name: ${this.name}, Department: ${this.department}, Salary: ${this.salary}`;
   }
+
+  increaseSelary(increase: number) {
+    this.salary += increase
+  }
 }
 
 class Manager extends Employee {
   // Реалізуйте конструктор та збільшіть salary на 10000
+  constructor(name: string, department: string, salary: number) {
+    super(name, department, salary)
+  }          
+  increase(increase: number) {
+    super.increaseSelary(increase)
+  }
+
 }
-
-
-export {};
+const manager = new Manager('Vlad', 'IT Support', 0)
+manager.increase(10000)
+export { };
